@@ -1,5 +1,6 @@
 package com.geistman.gtournament;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -42,6 +43,12 @@ public class ChoosePlayer extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Log.d(TAG, "Item selected: " + playerList.getItemAtPosition(position));
                 game.addPlayer(playerList.getItemAtPosition(position).toString());
+
+                //TODO: start new Activity here
+                if (game.isGameReady()) {
+                    Intent setWinner = new Intent(this, SetWinner.class);
+
+                }
             }
         });
 
