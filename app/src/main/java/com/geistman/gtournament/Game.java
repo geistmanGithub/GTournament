@@ -28,18 +28,16 @@ public class Game {
     public void addPlayer(String player) {
         if (getPlayer1()== null) {
             this.setPlayer1(player);
-            Log.d(TAG, "Player 1 set: "+player);
+
         }
         else {
             if (getPlayer2() == null) {
                 this.player2 = player;
-                Log.d(TAG, "Player 2 set: " + player);
-            }
-            else {
-                Log.d(TAG, "All Players already set");
             }
         }
-
+        Log.d(TAG, "Player 1: "+player1);
+        Log.d(TAG, "Player 2: "+player2);
+        Log.d(TAG, "Game ready: "+isGameReady());
     }
 
     public String getWinner() {
@@ -48,5 +46,9 @@ public class Game {
 
     public void setWinner(String winner) {
         this.winner = winner;
+    }
+
+    public boolean isGameReady() {
+        return player1 != null && player2 != null;
     }
 }
