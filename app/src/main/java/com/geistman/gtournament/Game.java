@@ -1,13 +1,37 @@
 package com.geistman.gtournament;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 
-public class Game {
+public class Game implements Parcelable{
     private static final String TAG = "GAME";
     private String player1;
     private String player2;
 
     private String winner;
+
+    protected Game(Parcel in) {
+        player1 = in.readString();
+        player2 = in.readString();
+        winner = in.readString();
+    }
+
+    public static final Creator<Game> CREATOR = new Creator<Game>() {
+        @Override
+        public Game createFromParcel(Parcel in) {
+            return new Game(in);
+        }
+
+        @Override
+        public Game[] newArray(int size) {
+            return new Game[size];
+        }
+    };
+
+    public Game() {
+
+    }
 
     public String getPlayer1() {
         return player1;
@@ -50,5 +74,17 @@ public class Game {
 
     public boolean isGameReady() {
         return player1 != null && player2 != null;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(getPlayer1());
+        dest.writeString(getPlayer2());
+        dest.writeString(getWinner());
     }
 }
