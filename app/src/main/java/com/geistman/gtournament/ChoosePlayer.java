@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.util.SparseBooleanArray;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -15,7 +14,10 @@ import java.util.ArrayList;
 public class ChoosePlayer extends AppCompatActivity {
 
     private static final String TAG = "Choose Player";
+    private ArrayList<String> playersList;
     public static final String GAME = "com.geistman.gtournament.GAME";
+
+
     private Game game;
 
 
@@ -24,26 +26,33 @@ public class ChoosePlayer extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_player);
 
-        ArrayList<String> players = new ArrayList<>();
-        players.add("Michael");
-        players.add("Oliver");
-        players.add("Herbert");
+        playersList = new ArrayList<>();
+        playersList.add("Michael");
+        playersList.add("Oliver");
+        playersList.add("Herbert");
 
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(
+        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(
                 this,
                 android.R.layout.simple_list_item_1,
-                players );
+                playersList);
 
-        final ListView playerList = (ListView) this.findViewById(R.id.playerList);
-        playerList.setAdapter(arrayAdapter);
+        
+        final ListView playersListView = (ListView) this.findViewById(R.id.playerList);
+        playersListView.setAdapter(arrayAdapter);
 
         game = new Game();
 
-        playerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        playersListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.d(TAG, "Item selected: " + playerList.getItemAtPosition(position));
-                game.addPlayer(playerList.getItemAtPosition(position).toString());
+                Log.d(TAG, "Item selected: " + playersListView.getItemAtPosition(position));
+
+                String player = playersListView.getItemAtPosition(position).toString();
+                if (game.addPlayer(player)) {
+                    playersList.remove(player);
+                    arrayAdapter.notifyDataSetChanged();
+                }
+
 
                 if (game.isGameReady()) {
                     startGame();
@@ -58,4 +67,6 @@ public class ChoosePlayer extends AppCompatActivity {
         setWinner.putExtra(GAME, game);
         startActivity(setWinner);
     }
+
+    //TODO: Repopulate list on new game, each time when activity is called again.
 }

@@ -49,17 +49,21 @@ public class Game implements Parcelable{
         this.player2 = player2;
     }
 
-    public void addPlayer(String player) {
+    public boolean addPlayer(String player) {
         if (getPlayer1()== null) {
             this.setPlayer1(player);
-
+            Log.d(TAG, this.toString());
+            return true;
         }
         else {
             if (getPlayer2() == null) {
                 this.player2 = player;
+                Log.d(TAG, this.toString());
+                return true;
             }
         }
         Log.d(TAG, this.toString());
+        return false;
     }
 
     public String getWinner() {
