@@ -44,14 +44,16 @@ public class ChoosePlayer extends AppCompatActivity {
                 Log.d(TAG, "Item selected: " + playerList.getItemAtPosition(position));
                 game.addPlayer(playerList.getItemAtPosition(position).toString());
 
-                //TODO: start new Activity here
                 if (game.isGameReady()) {
-                    Intent setWinner = new Intent(this, SetWinner.class);
-
+                    startGame();
                 }
             }
         });
 
+    }
 
+    private void startGame() {
+        Intent setWinner = new Intent(this, SetWinner.class);
+        startActivity(setWinner);
     }
 }
