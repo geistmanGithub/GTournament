@@ -4,7 +4,10 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
+
+import static android.view.View.*;
 
 public class SetWinner extends AppCompatActivity {
 
@@ -20,12 +23,22 @@ public class SetWinner extends AppCompatActivity {
         game = intent.getParcelableExtra(ChoosePlayer.GAME);
         Log.d(TAG, game.toString());
 
-        Button player1 = (Button) findViewById(R.id.player1);
+        final Button player1 = (Button) findViewById(R.id.player1);
         player1.setText(game.getPlayer1());
+        player1.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                game.setWinner((String) player1.getText());
+            }
+        });
 
-        Button player2 = (Button) findViewById(R.id.player2);
+        final Button player2 = (Button) findViewById(R.id.player2);
         player2.setText(game.getPlayer2());
-
-
+        player2.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                game.setWinner((String) player2.getText());
+            }
+        });
     }
 }

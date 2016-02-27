@@ -68,6 +68,7 @@ public class Game implements Parcelable{
 
     public void setWinner(String winner) {
         this.winner = winner;
+        Log.d(TAG, "Winner set to: "+this.winner);
     }
 
     public boolean isGameReady() {
