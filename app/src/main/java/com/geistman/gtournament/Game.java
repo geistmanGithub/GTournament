@@ -59,9 +59,7 @@ public class Game implements Parcelable{
                 this.player2 = player;
             }
         }
-        Log.d(TAG, "Player 1: "+player1);
-        Log.d(TAG, "Player 2: "+player2);
-        Log.d(TAG, "Game ready: "+isGameReady());
+        Log.d(TAG, this.toString());
     }
 
     public String getWinner() {
@@ -73,12 +71,22 @@ public class Game implements Parcelable{
     }
 
     public boolean isGameReady() {
+
         return player1 != null && player2 != null;
     }
 
     @Override
     public int describeContents() {
         return 0;
+    }
+
+    @Override
+    public String toString() {
+        return "Game{" +
+                "player1='" + player1 + '\'' +
+                ", player2='" + player2 + '\'' +
+                ", winner='" + winner + '\'' +
+                '}';
     }
 
     @Override

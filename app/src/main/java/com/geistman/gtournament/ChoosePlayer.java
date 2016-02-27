@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class ChoosePlayer extends AppCompatActivity {
 
     private static final String TAG = "Choose Player";
-    private static final String GAME = "com.geistman.gtournament.GAME";
+    public static final String GAME = "com.geistman.gtournament.GAME";
     private Game game;
 
 
