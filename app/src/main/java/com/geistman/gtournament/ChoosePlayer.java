@@ -26,6 +26,16 @@ public class ChoosePlayer extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_player);
 
+
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        game = new Game();
+
         playersList = new ArrayList<>();
         playersList.add("Michael");
         playersList.add("Oliver");
@@ -36,11 +46,10 @@ public class ChoosePlayer extends AppCompatActivity {
                 android.R.layout.simple_list_item_1,
                 playersList);
 
-        
+
         final ListView playersListView = (ListView) this.findViewById(R.id.playerList);
         playersListView.setAdapter(arrayAdapter);
 
-        game = new Game();
 
         playersListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -59,6 +68,7 @@ public class ChoosePlayer extends AppCompatActivity {
                 }
             }
         });
+
 
     }
 
