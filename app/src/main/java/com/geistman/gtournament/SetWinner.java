@@ -76,6 +76,9 @@ public class SetWinner extends AppCompatActivity {
                 child.setEnabled(enOrDisable);
             else
                 child.setEnabled(!enOrDisable);
+            if (child instanceof ViewGroup){
+                setEnabledOfAllElementsOfViewExcept((ViewGroup) child, exceptThisButton, enOrDisable);
+            }
         }
     }
 
