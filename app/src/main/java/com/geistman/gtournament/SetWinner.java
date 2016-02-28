@@ -60,7 +60,7 @@ public class SetWinner extends AppCompatActivity {
 
         if (game.getWinner() != null) {
             ViewGroup parentView = (ViewGroup) findViewById(R.id.playerViewGroup);
-            String winnerButton = intent.getCharSequenceExtra(SetWinner.WINNER_BUTTON_TAG).toString();
+            String winnerButton = intent.getCharSequenceExtra(WINNER_BUTTON_TAG).toString();
             setEnabledOfAllElementsOfViewExcept(parentView, winnerButton, false);
         }
     }
@@ -69,7 +69,7 @@ public class SetWinner extends AppCompatActivity {
         game.setWinner((String) winnerButton.getText());
         Intent confirmWinner = new Intent(this, SetWinner.class);
         confirmWinner.putExtra(ChoosePlayer.GAME, game);
-        confirmWinner.putExtra(SetWinner.WINNER_BUTTON_TAG, (CharSequence) winnerButton.getTag());
+        confirmWinner.putExtra(WINNER_BUTTON_TAG, (CharSequence) winnerButton.getTag());
         startActivity(confirmWinner);
     }
 
