@@ -16,6 +16,7 @@ public class ChoosePlayer extends AppCompatActivity {
     private static final String TAG = "Choose Player";
     private ArrayList<String> playersList;
     public static final String GAME = "com.geistman.gtournament.GAME";
+    private GameHistory gameHistory;
 
 
     private Game game;
@@ -25,9 +26,7 @@ public class ChoosePlayer extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_player);
-
-
-
+        gameHistory = new GameHistory();
     }
 
     @Override

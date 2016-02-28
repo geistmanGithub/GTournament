@@ -25,7 +25,7 @@ public class SetWinner extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set_winner);
 
-        Intent intent = getIntent();
+        final Intent intent = getIntent();
         game = intent.getParcelableExtra(ChoosePlayer.GAME);
         Log.d(TAG, game.toString());
 
@@ -49,9 +49,21 @@ public class SetWinner extends AppCompatActivity {
 
         if (game.getWinner() != null) {
             ViewGroup parentView = (ViewGroup) findViewById(R.id.playerViewGroup);
-            String winnerButton = intent.getCharSequenceExtra(WINNER_BUTTON_TAG).toString();
-            setEnabledOfAllElementsOfViewExcept(parentView, winnerButton, false);
-        } else {
+            String winnerButtonTag = intent.getCharSequenceExtra(WINNER_BUTTON_TAG).toString();
+            setEnabledOfAllElementsOfViewExcept(parentView, winnerButtonTag, false);
+            Button winnersButton = getWinnersButton(winnerButtonTag);
+            winnersButton.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    GameHistory.addGame(game);
+                    Intent newGame = new Intent(getApplicationContext(), ChoosePlayer.class);
+                    newGame.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(newGame);
+                }
+            });
+        }
+
+        else {
             player1Button.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -66,6 +78,13 @@ public class SetWinner extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    private Button getWinnersButton(String winnerButtonTag) {
+        if (winnerButtonTag.equals(PLAYER1_TAG))
+            return (Button) findViewById(R.id.player1);
+        else
+            return (Button) findViewById(R.id.player2);
     }
 
     private void getConfirmationForWinner(Button winnerButton) {
