@@ -77,6 +77,4 @@ public class ChoosePlayer extends AppCompatActivity {
         setWinner.putExtra(GAME, game);
         startActivity(setWinner);
     }
-
-    //TODO: Repopulate list on new game, each time when activity is called again.
 }
