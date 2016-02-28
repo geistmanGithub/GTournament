@@ -32,12 +32,7 @@ public class SetWinner extends AppCompatActivity {
         final Button player1Button = (Button) findViewById(R.id.player1);
         player1Button.setText(game.getPlayer1());
         player1Button.setTag(PLAYER1_TAG);
-        player1Button.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getConfirmationForWinner(player1Button);
-            }
-        });
+
 
         final Button cancelButton = (Button) findViewById(R.id.cancelGame);
         cancelButton.setOnClickListener(new OnClickListener() {
@@ -50,18 +45,26 @@ public class SetWinner extends AppCompatActivity {
         final Button player2Button = (Button) findViewById(R.id.player2);
         player2Button.setText(game.getPlayer2());
         player2Button.setTag(PLAYER2_TAG);
-        player2Button.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getConfirmationForWinner(player2Button);
 
-            }
-        });
 
         if (game.getWinner() != null) {
             ViewGroup parentView = (ViewGroup) findViewById(R.id.playerViewGroup);
             String winnerButton = intent.getCharSequenceExtra(WINNER_BUTTON_TAG).toString();
             setEnabledOfAllElementsOfViewExcept(parentView, winnerButton, false);
+        } else {
+            player1Button.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    getConfirmationForWinner(player1Button);
+                }
+            });
+            player2Button.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    getConfirmationForWinner(player2Button);
+
+                }
+            });
         }
     }
 
