@@ -8,8 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import java.util.Objects;
-
 import static android.view.View.*;
 
 public class SetWinner extends AppCompatActivity {
@@ -17,6 +15,7 @@ public class SetWinner extends AppCompatActivity {
     private static final String TAG = "Set Winner";
     private static final String PLAYER1_TAG = "PLAYER1";
     private static final String PLAYER2_TAG = "PLAYER2";
+    private static final String WINNER_BUTTON_TAG = "com.geistman.gtournament.WINNER_BUTTON_TAG";
 
 
     private Game game;
@@ -58,16 +57,23 @@ public class SetWinner extends AppCompatActivity {
 
             }
         });
+
+        if (game.getWinner() != null) {
+            ViewGroup parentView = (ViewGroup) findViewById(R.id.playerViewGroup);
+            String winnerButton = intent.getCharSequenceExtra(SetWinner.WINNER_BUTTON_TAG).toString();
+            setEnabledOfAllElementsOfViewExcept(parentView, winnerButton, false);
+        }
     }
 
     private void getConfirmationForWinner(Button winnerButton) {
         game.setWinner((String) winnerButton.getText());
-        ViewGroup parentView = (ViewGroup) findViewById(R.id.playerViewGroup);
-        setEnabledOfAllElementsOfViewExcept(parentView, winnerButton, false);
+        Intent confirmWinner = new Intent(this, SetWinner.class);
+        confirmWinner.putExtra(ChoosePlayer.GAME, game);
+        confirmWinner.putExtra(SetWinner.WINNER_BUTTON_TAG, (CharSequence) winnerButton.getTag());
+        startActivity(confirmWinner);
     }
 
-    private void setEnabledOfAllElementsOfViewExcept(ViewGroup thisViewGroup, Button exceptThisButton, boolean enOrDisable) {
-        Object exceptThisButtonTag = exceptThisButton.getTag();
+    private void setEnabledOfAllElementsOfViewExcept(ViewGroup thisViewGroup, String exceptThisButtonTag, boolean enOrDisable) {
 
         for (int i = 0; i < thisViewGroup.getChildCount(); i++){
             View child = thisViewGroup.getChildAt(i);
@@ -77,7 +83,7 @@ public class SetWinner extends AppCompatActivity {
             else
                 child.setEnabled(!enOrDisable);
             if (child instanceof ViewGroup){
-                setEnabledOfAllElementsOfViewExcept((ViewGroup) child, exceptThisButton, enOrDisable);
+                setEnabledOfAllElementsOfViewExcept((ViewGroup) child, exceptThisButtonTag, enOrDisable);
             }
         }
     }
