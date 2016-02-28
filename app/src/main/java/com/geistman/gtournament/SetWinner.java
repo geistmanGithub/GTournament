@@ -32,6 +32,14 @@ public class SetWinner extends AppCompatActivity {
             }
         });
 
+        final Button cancelButton = (Button) findViewById(R.id.cancelGame);
+        cancelButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startNewGame();
+            }
+        });
+
         final Button player2 = (Button) findViewById(R.id.player2);
         player2.setText(game.getPlayer2());
         player2.setOnClickListener(new OnClickListener() {
@@ -40,5 +48,9 @@ public class SetWinner extends AppCompatActivity {
                 game.setWinner((String) player2.getText());
             }
         });
+    }
+
+    private void startNewGame() {
+        finish();
     }
 }
