@@ -100,4 +100,8 @@ public class Game implements Parcelable{
         dest.writeString(getPlayer2());
         dest.writeString(getWinner());
     }
+
+    public void confirmWinner() {
+        GameHistory.addGame(this);
+    }
 }

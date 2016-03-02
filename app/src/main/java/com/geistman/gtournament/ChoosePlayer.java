@@ -40,16 +40,12 @@ public class ChoosePlayer extends AppCompatActivity {
         playersList.add("Oliver");
         playersList.add("Herbert");
 
+        final ListView playersListView = (ListView) this.findViewById(R.id.playerList);
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(
                 this,
                 android.R.layout.simple_list_item_1,
                 playersList);
-
-
-        final ListView playersListView = (ListView) this.findViewById(R.id.playerList);
         playersListView.setAdapter(arrayAdapter);
-
-
         playersListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

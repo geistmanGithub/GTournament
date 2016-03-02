@@ -55,7 +55,7 @@ public class SetWinner extends AppCompatActivity {
             winnersButton.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    GameHistory.addGame(game);
+                    game.confirmWinner();
                     Intent newGame = new Intent(getApplicationContext(), ChoosePlayer.class);
                     newGame.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(newGame);
