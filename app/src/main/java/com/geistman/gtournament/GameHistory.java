@@ -27,6 +27,7 @@ public class GameHistory{
 
     public static void addGame(Game game) {
         gameList.add(game);
+        Log.d(TAG, "Game added:" + game.toString());
 
         ContentValues values = new ContentValues();
         values.put(Game.GAME_TIME, game.getGameTime());
@@ -36,10 +37,15 @@ public class GameHistory{
 
         database.insert(TABLE_NAME, null, values);
 
-        Log.d(TAG, "Game added:" + game.toString());
 
-        Log.d(TAG, "Number of Games stored: " + gameList.size());
-        //TODO: get number of stored entries in db database.rawQuery("count * from " + TABLE_NAME);
+        Log.d(TAG, "Number of Games stored temporarily: " + gameList.size());
+
+        Cursor mCount= database.rawQuery("select count(*) from "+TABLE_NAME, null);
+        mCount.moveToFirst();
+        int count= mCount.getInt(0);
+        mCount.close();
+
+        Log.d(TAG, "Number of Games stored in database: " + count);
 
     }
 
