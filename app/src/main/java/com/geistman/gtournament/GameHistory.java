@@ -23,11 +23,13 @@ public class GameHistory{
     public GameHistory(Context context) {
         dbHelper = new GameHistoryDbHelper(context);
         database = dbHelper.getWritableDatabase();
+        Log.d(TAG, "Games stored in Database: "+getDatabaseCount());
     }
 
     public static void addGame(Game game) {
         gameList.add(game);
         Log.d(TAG, "Game added:" + game.toString());
+        Log.d(TAG, "Number of Games stored temporarily: " + gameList.size());
 
         ContentValues values = new ContentValues();
         values.put(Game.GAME_PLAYER1, game.getPlayer1());
@@ -36,14 +38,15 @@ public class GameHistory{
 
         database.insert(TABLE_NAME, null, values);
 
+        Log.d(TAG, "Number of Games stored in database: " + getDatabaseCount());
+    }
 
-        Log.d(TAG, "Number of Games stored temporarily: " + gameList.size());
-
+    private static int getDatabaseCount() {
         Cursor mCount= database.rawQuery("select count(*) from " + TABLE_NAME, null);
         mCount.moveToFirst();
         int count= mCount.getInt(0);
-        Log.d(TAG, "Number of Games stored in database: " + count);
         mCount.close();
+        return count;
     }
 
 
