@@ -4,7 +4,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.ArraySet;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -50,4 +49,24 @@ public class GameHistory{
     }
 
 
+    public int getWinsOfPlayer(String winner, String looser) {
+        String[] projection = {
+                Game.GAME_WINNER
+        };
+
+        String selection = Game.GAME_WINNER+"= "+winner+" and ("+Game.GAME_PLAYER1+" = "+looser+" or "+Game.GAME_PLAYER2+" = "+looser+")";
+
+
+        Cursor c = database.query(
+                TABLE_NAME,                               // The table to query
+                projection,                               // The columns to return
+                selection,                                // The columns for the WHERE clause
+                null,                            // The values for the WHERE clause
+                null,                                     // don't group the rows
+                null,                                     // don't filter by row groups
+                null                                      // The sort order
+        );
+
+        return c.getCount();
+    }
 }

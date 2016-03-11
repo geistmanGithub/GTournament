@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import static android.view.View.*;
 
@@ -17,8 +18,9 @@ public class SetWinner extends AppCompatActivity {
     private static final String PLAYER2_TAG = "PLAYER2";
     private static final String WINNER_BUTTON_TAG = "com.geistman.gtournament.WINNER_BUTTON_TAG";
 
-
     private Game game;
+
+    private GameHistory gameHistory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,10 +31,14 @@ public class SetWinner extends AppCompatActivity {
         game = intent.getParcelableExtra(ChoosePlayer.GAME);
         Log.d(TAG, game.toString());
 
+        gameHistory = new GameHistory(getApplicationContext());
+
         final Button player1Button = (Button) findViewById(R.id.player1);
         player1Button.setText(game.getPlayer1());
         player1Button.setTag(PLAYER1_TAG);
 
+        final TextView player1Wins= (TextView) findViewById(R.id.Player1Wins);
+        //TODO: player1Wins.setText("Wins: "+gameHistory.getWinsOfPlayer(game.getPlayer1(), game.getPlayer2()));
 
         final Button cancelButton = (Button) findViewById(R.id.cancelGame);
         cancelButton.setOnClickListener(new OnClickListener() {
