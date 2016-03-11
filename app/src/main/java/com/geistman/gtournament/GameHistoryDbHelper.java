@@ -10,7 +10,6 @@ public class GameHistoryDbHelper extends android.database.sqlite.SQLiteOpenHelpe
     private static final String DATABASE_NAME ="GameHistoryDB";
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_CREATE = "create table "+GameHistory.TABLE_NAME+" (" +
-            "_"+Game.GAME_TIME+"long primary key, " +
             Game.GAME_PLAYER1+" text, " +
             Game.GAME_PLAYER2+" text, " +
             Game.GAME_WINNER+" text);";

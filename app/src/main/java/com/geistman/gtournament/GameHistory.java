@@ -30,7 +30,6 @@ public class GameHistory{
         Log.d(TAG, "Game added:" + game.toString());
 
         ContentValues values = new ContentValues();
-        values.put(Game.GAME_TIME, game.getGameTime());
         values.put(Game.GAME_PLAYER1, game.getPlayer1());
         values.put(Game.GAME_PLAYER2, game.getPlayer2());
         values.put(Game.GAME_WINNER, game.getWinner());
@@ -40,13 +39,11 @@ public class GameHistory{
 
         Log.d(TAG, "Number of Games stored temporarily: " + gameList.size());
 
-        Cursor mCount= database.rawQuery("select count(*) from "+TABLE_NAME, null);
+        Cursor mCount= database.rawQuery("select count(*) from " + TABLE_NAME, null);
         mCount.moveToFirst();
         int count= mCount.getInt(0);
-        mCount.close();
-
         Log.d(TAG, "Number of Games stored in database: " + count);
-
+        mCount.close();
     }
 
 

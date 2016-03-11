@@ -2,9 +2,10 @@ package com.geistman.gtournament;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.provider.BaseColumns;
 import android.util.Log;
 
-public class Game implements Parcelable{
+public class Game implements Parcelable, BaseColumns{
 
     //gameTime long primary key, player1 text, player2 text, winner text
 
@@ -15,8 +16,6 @@ public class Game implements Parcelable{
         public final static String GAME_PLAYER2 = "player2";
     private String winner;
         public final static String GAME_WINNER = "winner";
-    private long gameTime;
-        public final static String GAME_TIME = "gameTime";
 
     protected Game(Parcel in) {
         player1 = in.readString();
@@ -64,7 +63,7 @@ public class Game implements Parcelable{
         }
         else {
             if (getPlayer2() == null) {
-                this.player2 = player;
+                this.setPlayer2(player);
                 Log.d(TAG, this.toString());
                 return true;
             }
@@ -95,7 +94,6 @@ public class Game implements Parcelable{
     @Override
     public String toString() {
         return "Game{" +
-                "gameTime='" + gameTime + '\'' +
                 "player1='" + player1 + '\'' +
                 ", player2='" + player2 + '\'' +
                 ", winner='" + winner + '\'' +
@@ -110,15 +108,7 @@ public class Game implements Parcelable{
     }
 
     public void confirmWinner() {
-        setGameTime(System.currentTimeMillis());
         GameHistory.addGame(this);
     }
 
-    public void setGameTime(long gameTime) {
-        this.gameTime = gameTime;
-    }
-
-    public long getGameTime() {
-        return gameTime;
-    }
 }
