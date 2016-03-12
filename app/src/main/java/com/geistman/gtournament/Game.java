@@ -23,7 +23,20 @@ public class Game implements Parcelable, BaseColumns{
         player1 = in.readString();
         player2 = in.readString();
         winner = in.readString();
+        player1Won = in.readInt();
+        player2Won = in.readInt();
+
     }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(getPlayer1());
+        dest.writeString(getPlayer2());
+        dest.writeString(getWinner());
+        dest.writeInt(player1Won);
+        dest.writeInt(player2Won);
+    }
+
 
     public static final Creator<Game> CREATOR = new Creator<Game>() {
         @Override
@@ -104,12 +117,6 @@ public class Game implements Parcelable, BaseColumns{
                 '}';
     }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(getPlayer1());
-        dest.writeString(getPlayer2());
-        dest.writeString(getWinner());
-    }
 
     public void confirmWinner() {
         GameHistory.addGame(this);

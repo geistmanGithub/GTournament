@@ -75,6 +75,7 @@ public class ChoosePlayer extends AppCompatActivity {
         game.setWins(11, 12);
 
         setWinner.putExtra(GAME, game);
+        Log.d(TAG, "Game added to intent: "+game.toString());
 
         startActivity(setWinner);
     }
