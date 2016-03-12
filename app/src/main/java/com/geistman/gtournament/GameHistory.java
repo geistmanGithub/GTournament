@@ -55,13 +55,15 @@ public class GameHistory{
         };
 
         String selection = Game.GAME_WINNER+"= "+winner+" and ("+Game.GAME_PLAYER1+" = "+looser+" or "+Game.GAME_PLAYER2+" = "+looser+")";
+        Log.d(TAG, "Querying database: Projection"+projection.toString()+" ,Selection"+selection);
+
 
 
         Cursor c = database.query(
                 TABLE_NAME,                               // The table to query
                 projection,                               // The columns to return
                 selection,                                // The columns for the WHERE clause
-                null,                            // The values for the WHERE clause
+                null,                                      // The values for the WHERE clause
                 null,                                     // don't group the rows
                 null,                                     // don't filter by row groups
                 null                                      // The sort order
