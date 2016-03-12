@@ -52,7 +52,7 @@ public class SetWinner extends AppCompatActivity {
         player2Button.setText(game.getPlayer2());
         player2Button.setTag(PLAYER2_TAG);
 
-        final TextView player2Wins= (TextView) findViewById(R.id.Player1Wins);
+        final TextView player2Wins= (TextView) findViewById(R.id.Player2Wins);
         player1Wins.setText(game.getPlayer2Won());
 
 
