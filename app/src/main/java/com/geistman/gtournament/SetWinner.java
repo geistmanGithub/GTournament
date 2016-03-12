@@ -29,7 +29,7 @@ public class SetWinner extends AppCompatActivity {
 
         final Intent intent = getIntent();
         game = intent.getParcelableExtra(ChoosePlayer.GAME);
-        Log.d(TAG, game.toString());
+        Log.d(TAG, "Game loaded: "+game.toString());
 
         gameHistory = new GameHistory(getApplicationContext());
 
@@ -38,7 +38,7 @@ public class SetWinner extends AppCompatActivity {
         player1Button.setTag(PLAYER1_TAG);
 
         final TextView player1Wins= (TextView) findViewById(R.id.Player1Wins);
-        player1Wins.setText(game.getPlayer1Won());
+        player1Wins.setText("Wins: "+ game.getPlayer1Won());
 
         final Button cancelButton = (Button) findViewById(R.id.cancelGame);
         cancelButton.setOnClickListener(new OnClickListener() {
@@ -53,7 +53,7 @@ public class SetWinner extends AppCompatActivity {
         player2Button.setTag(PLAYER2_TAG);
 
         final TextView player2Wins= (TextView) findViewById(R.id.Player2Wins);
-        player1Wins.setText(game.getPlayer2Won());
+        player2Wins.setText("Wins: "+ game.getPlayer2Won());
 
 
         if (game.getWinner() != null) {

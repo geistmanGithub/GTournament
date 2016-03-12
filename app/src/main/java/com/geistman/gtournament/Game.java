@@ -97,7 +97,9 @@ public class Game implements Parcelable, BaseColumns{
     public String toString() {
         return "Game{" +
                 "player1='" + player1 + '\'' +
+                ", player1Won=" + player1Won +
                 ", player2='" + player2 + '\'' +
+                ", player2Won=" + player2Won +
                 ", winner='" + winner + '\'' +
                 '}';
     }

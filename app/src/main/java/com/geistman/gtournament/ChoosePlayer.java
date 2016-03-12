@@ -71,9 +71,8 @@ public class ChoosePlayer extends AppCompatActivity {
     private void startGame() {
         Intent setWinner = new Intent(this, SetWinner.class);
 
-        int player1Won = 1;
-        int player2Won = 2;
-        game.setWins(player1Won, player2Won);
+        //TODO: Get Real Values of PlayerWonGames against each other
+        game.setWins(11, 12);
 
         setWinner.putExtra(GAME, game);
 
