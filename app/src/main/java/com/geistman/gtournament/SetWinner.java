@@ -38,7 +38,7 @@ public class SetWinner extends AppCompatActivity {
         player1Button.setTag(PLAYER1_TAG);
 
         final TextView player1Wins= (TextView) findViewById(R.id.Player1Wins);
-        //TODO: player1Wins.setText("Wins: "+gameHistory.getWinsOfPlayer(game.getPlayer1(), game.getPlayer2()));
+        player1Wins.setText("Wins: "+gameHistory.getWinsOfPlayer(game.getPlayer1(), game.getPlayer2()));
 
         final Button cancelButton = (Button) findViewById(R.id.cancelGame);
         cancelButton.setOnClickListener(new OnClickListener() {

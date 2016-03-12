@@ -54,7 +54,7 @@ public class GameHistory{
                 Game.GAME_WINNER
         };
 
-        String selection = Game.GAME_WINNER+"= "+winner+" and ("+Game.GAME_PLAYER1+" = "+looser+" or "+Game.GAME_PLAYER2+" = "+looser+")";
+        String selection = Game.GAME_WINNER+"= '"+winner+"' and ("+Game.GAME_PLAYER1+" = '"+looser+"' or "+Game.GAME_PLAYER2+" = '"+looser+"')";
         Log.d(TAG, "Querying database: Projection"+projection.toString()+" ,Selection"+selection);
 
 
