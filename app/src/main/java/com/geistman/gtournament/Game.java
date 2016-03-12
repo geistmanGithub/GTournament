@@ -7,8 +7,7 @@ import android.util.Log;
 
 public class Game implements Parcelable, BaseColumns{
 
-    //gameTime long primary key, player1 text, player2 text, winner text
-
+    //When adding an attribute also check on the Parcel Genaraot and Parcel Loader!
     private static final String TAG = "GAME";
     private String player1;
         public final static String GAME_PLAYER1 = "player1";
@@ -25,7 +24,6 @@ public class Game implements Parcelable, BaseColumns{
         winner = in.readString();
         player1Won = in.readInt();
         player2Won = in.readInt();
-
     }
 
     @Override
