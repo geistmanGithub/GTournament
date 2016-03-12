@@ -16,6 +16,8 @@ public class Game implements Parcelable, BaseColumns{
         public final static String GAME_PLAYER2 = "player2";
     private String winner;
         public final static String GAME_WINNER = "winner";
+    private int player1Won;
+    private int player2Won;
 
     protected Game(Parcel in) {
         player1 = in.readString();
@@ -111,4 +113,16 @@ public class Game implements Parcelable, BaseColumns{
         GameHistory.addGame(this);
     }
 
+    public void setWins(int player1Won, int player2Won) {
+        this.player1Won = player1Won;
+        this.player2Won = player2Won;
+    }
+
+    public int getPlayer1Won() {
+        return player1Won;
+    }
+
+    public int getPlayer2Won() {
+        return player2Won;
+    }
 }

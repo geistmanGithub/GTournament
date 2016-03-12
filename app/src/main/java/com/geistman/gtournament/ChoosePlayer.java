@@ -15,6 +15,7 @@ public class ChoosePlayer extends AppCompatActivity {
 
     private static final String TAG = "Choose Player";
     private ArrayList<String> playersList;
+
     public static final String GAME = "com.geistman.gtournament.GAME";
     private GameHistory gameHistory;
 
@@ -69,7 +70,13 @@ public class ChoosePlayer extends AppCompatActivity {
 
     private void startGame() {
         Intent setWinner = new Intent(this, SetWinner.class);
+
+        int player1Won = 1;
+        int player2Won = 2;
+        game.setWins(player1Won, player2Won);
+
         setWinner.putExtra(GAME, game);
+
         startActivity(setWinner);
     }
 }

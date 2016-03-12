@@ -38,7 +38,7 @@ public class SetWinner extends AppCompatActivity {
         player1Button.setTag(PLAYER1_TAG);
 
         final TextView player1Wins= (TextView) findViewById(R.id.Player1Wins);
-        player1Wins.setText("Wins: "+gameHistory.getWinsOfPlayer(game.getPlayer1(), game.getPlayer2()));
+        player1Wins.setText(game.getPlayer1Won());
 
         final Button cancelButton = (Button) findViewById(R.id.cancelGame);
         cancelButton.setOnClickListener(new OnClickListener() {
@@ -51,6 +51,9 @@ public class SetWinner extends AppCompatActivity {
         final Button player2Button = (Button) findViewById(R.id.player2);
         player2Button.setText(game.getPlayer2());
         player2Button.setTag(PLAYER2_TAG);
+
+        final TextView player2Wins= (TextView) findViewById(R.id.Player1Wins);
+        player1Wins.setText(game.getPlayer2Won());
 
 
         if (game.getWinner() != null) {
