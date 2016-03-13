@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import static android.view.View.*;
 
@@ -38,7 +39,7 @@ public class SetWinner extends AppCompatActivity {
         player1Button.setTag(PLAYER1_TAG);
 
         final TextView player1Wins= (TextView) findViewById(R.id.Player1Wins);
-        player1Wins.setText("Wins: "+ game.getPlayer1Won());
+        player1Wins.setText("Wins: " + game.getPlayer1Won());
 
         final Button cancelButton = (Button) findViewById(R.id.cancelGame);
         cancelButton.setOnClickListener(new OnClickListener() {
@@ -53,7 +54,7 @@ public class SetWinner extends AppCompatActivity {
         player2Button.setTag(PLAYER2_TAG);
 
         final TextView player2Wins= (TextView) findViewById(R.id.Player2Wins);
-        player2Wins.setText("Wins: "+ game.getPlayer2Won());
+        player2Wins.setText("Wins: " + game.getPlayer2Won());
 
 
         if (game.getWinner() != null) {
@@ -67,6 +68,7 @@ public class SetWinner extends AppCompatActivity {
                     game.confirmWinner();
                     Intent newGame = new Intent(getApplicationContext(), ChoosePlayer.class);
                     newGame.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    Toast.makeText(getApplicationContext(), "Winner confirmed: "+game.getWinner(), Toast.LENGTH_LONG).show();
                     startActivity(newGame);
                 }
             });

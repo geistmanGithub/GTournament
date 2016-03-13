@@ -64,8 +64,6 @@ public class ChoosePlayer extends AppCompatActivity {
                 }
             }
         });
-
-
     }
 
     private void startGame() {
