@@ -73,6 +73,7 @@ public class ChoosePlayer extends AppCompatActivity {
 
         //TODO: Get Real Values of PlayerWonGames against each other
         game.setWins(11, 12);
+        game.setWins(gameHistory.getWinsOfPlayer(game.getPlayer1(), game.getPlayer2()), gameHistory.getWinsOfPlayer(game.getPlayer2(), game.getPlayer1()));
 
         setWinner.putExtra(GAME, game);
         Log.d(TAG, "Game added to intent: "+game.toString());
