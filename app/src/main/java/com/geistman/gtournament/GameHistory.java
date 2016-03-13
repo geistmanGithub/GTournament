@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class GameHistory{
 
@@ -55,9 +56,7 @@ public class GameHistory{
         };
 
         String selection = Game.GAME_WINNER+"= '"+winner+"' and ("+Game.GAME_PLAYER1+" = '"+looser+"' or "+Game.GAME_PLAYER2+" = '"+looser+"')";
-        Log.d(TAG, "Querying database: Projection"+projection.toString()+" ,Selection"+selection);
-
-
+        Log.d(TAG, "Querying database: Projection"+ Arrays.toString(projection)+" ,Selection: "+selection);
 
         Cursor c = database.query(
                 TABLE_NAME,                               // The table to query
