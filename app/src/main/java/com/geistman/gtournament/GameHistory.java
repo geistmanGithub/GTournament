@@ -6,20 +6,20 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
-public class GameHistory extends GameHistoryDbHelper{
+public class GameHistory {
 
     private static final String TAG = "GAME HISTORY";
 
     private static SQLiteDatabase database;
     public static final String TABLE_NAME = "gameHistory";
+    private final GameHistoryDbHelper gameHistoryDbHelper;
 
 
     public GameHistory(Context context) {
-        super(context);
-        database = this.getWritableDatabase();
+        gameHistoryDbHelper = new GameHistoryDbHelper(context);
+        database = gameHistoryDbHelper.getWritableDatabase();
         Log.d(TAG, "Games stored in Database: " + getDatabaseCount());
     }
 
@@ -62,5 +62,9 @@ public class GameHistory extends GameHistoryDbHelper{
         );
         c.close();
         return c.getCount();
+    }
+
+    public void onCreate(SQLiteDatabase db) {
+        gameHistoryDbHelper.onCreate(db);
     }
 }
