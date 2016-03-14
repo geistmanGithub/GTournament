@@ -18,7 +18,7 @@ public class GameHistory{
 
     public static final String TABLE_NAME = "gameHistory";
 
-    private static ArrayList<Game> gameList = new ArrayList<>();
+    private static ArrayList<Game> gameList = new ArrayList<Game>();
 
     public GameHistory(Context context) {
         dbHelper = new GameHistoryDbHelper(context);
