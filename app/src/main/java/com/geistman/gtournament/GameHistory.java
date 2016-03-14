@@ -14,10 +14,8 @@ public class GameHistory extends GameHistoryDbHelper{
     private static final String TAG = "GAME HISTORY";
 
     private static SQLiteDatabase database;
-
     public static final String TABLE_NAME = "gameHistory";
 
-    private static ArrayList<Game> gameList = new ArrayList<>();
 
     public GameHistory(Context context) {
         super(context);
@@ -26,10 +24,6 @@ public class GameHistory extends GameHistoryDbHelper{
     }
 
     public static void addGame(Game game) {
-        gameList.add(game);
-        Log.d(TAG, "Game added:" + game.toString());
-        Log.d(TAG, "Number of Games stored temporarily: " + gameList.size());
-
         ContentValues values = new ContentValues();
         values.put(Game.GAME_PLAYER1, game.getPlayer1());
         values.put(Game.GAME_PLAYER2, game.getPlayer2());
