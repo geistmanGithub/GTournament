@@ -9,11 +9,10 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class GameHistory{
+public class GameHistory extends GameHistoryDbHelper{
 
     private static final String TAG = "GAME HISTORY";
 
-    private GameHistoryDbHelper dbHelper;
     private static SQLiteDatabase database;
 
     public static final String TABLE_NAME = "gameHistory";
@@ -21,9 +20,9 @@ public class GameHistory{
     private static ArrayList<Game> gameList = new ArrayList<>();
 
     public GameHistory(Context context) {
-        dbHelper = new GameHistoryDbHelper(context);
-        database = dbHelper.getWritableDatabase();
-        Log.d(TAG, "Games stored in Database: "+getDatabaseCount());
+        super(context);
+        database = this.getWritableDatabase();
+        Log.d(TAG, "Games stored in Database: " + getDatabaseCount());
     }
 
     public static void addGame(Game game) {
@@ -67,7 +66,7 @@ public class GameHistory{
                 null,                                     // don't filter by row groups
                 null                                      // The sort order
         );
-
+        c.close();
         return c.getCount();
     }
 }
