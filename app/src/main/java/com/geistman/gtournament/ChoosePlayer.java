@@ -40,6 +40,7 @@ public class ChoosePlayer extends AppCompatActivity {
         playersList.add("Michael");
         playersList.add("Oliver");
         playersList.add("Herbert");
+        playersList.add("Thomas");
         playersList.add("Philipp");
         playersList.add("Thomas");
 
