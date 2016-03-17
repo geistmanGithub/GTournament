@@ -71,17 +71,14 @@ public class Game implements Parcelable, BaseColumns{
     public boolean addPlayer(String player) {
         if (getPlayer1()== null) {
             this.setPlayer1(player);
-            Log.d(TAG, this.toString());
             return true;
         }
         else {
             if (getPlayer2() == null) {
                 this.setPlayer2(player);
-                Log.d(TAG, this.toString());
                 return true;
             }
         }
-        Log.d(TAG, this.toString());
         return false;
     }
 

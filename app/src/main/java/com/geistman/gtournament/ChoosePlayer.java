@@ -56,9 +56,11 @@ public class ChoosePlayer extends AppCompatActivity {
 
                 String player = playersListView.getItemAtPosition(position).toString();
                 if (game.addPlayer(player)) {
+                    Log.d(TAG, "Added Player to Game:"+ player);
                     playersList.remove(player);
                     arrayAdapter.notifyDataSetChanged();
-                }
+                } else
+                    Log.e(TAG, "Couldn't add player: "+player);
 
 
                 if (game.isGameReady()) {
