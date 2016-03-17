@@ -5,22 +5,28 @@ import android.os.Parcelable;
 import android.provider.BaseColumns;
 import android.util.Log;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Game implements Parcelable, BaseColumns{
 
-    //When adding an attribute also check on the Parcel Genaraot and Parcel Loader!
+    //When adding an attribute also check on the Parcel Generator and Parcel Loader!
     private static final String TAG = "GAME";
-    private String player1;
         public final static String GAME_PLAYER1 = "player1";
-    private String player2;
         public final static String GAME_PLAYER2 = "player2";
+
+    private final int MAXPLAYERS = 2;
+    private ArrayList<String> players = new ArrayList<>();
+
+
     private String winner;
         public final static String GAME_WINNER = "winner";
     private int player1Won;
     private int player2Won;
 
     protected Game(Parcel in) {
-        player1 = in.readString();
-        player2 = in.readString();
+        players.add(in.readString());
+        players.add(in.readString());
         winner = in.readString();
         player1Won = in.readInt();
         player2Won = in.readInt();
@@ -52,32 +58,19 @@ public class Game implements Parcelable, BaseColumns{
 
     }
 
-    public String getPlayer1() {
-        return player1;
-    }
-
-    private void setPlayer1(String player1) {
-        this.player1 = player1;
-    }
-
     public String getPlayer2() {
-        return player2;
+        return players.get(2);
     }
 
-    private void setPlayer2(String player2) {
-        this.player2 = player2;
+    public String getPlayer1() {
+        return players.get(1);
     }
+
 
     public boolean addPlayer(String player) {
-        if (getPlayer1()== null) {
-            this.setPlayer1(player);
+        if (players.size() < MAXPLAYERS) {
+            players.add(player);
             return true;
-        }
-        else {
-            if (getPlayer2() == null) {
-                this.setPlayer2(player);
-                return true;
-            }
         }
         return false;
     }
@@ -92,8 +85,7 @@ public class Game implements Parcelable, BaseColumns{
     }
 
     public boolean isGameReady() {
-
-        return player1 != null && player2 != null;
+        return players.size() == 2;
     }
 
     @Override
@@ -103,10 +95,13 @@ public class Game implements Parcelable, BaseColumns{
 
     @Override
     public String toString() {
+        String s = "";
+        for (String player: players) {
+            s += "Player: "+player;
+        }
+        
         return "Game{" +
-                "player1='" + player1 + '\'' +
                 ", player1Won=" + player1Won +
-                ", player2='" + player2 + '\'' +
                 ", player2Won=" + player2Won +
                 ", winner='" + winner + '\'' +
                 '}';
