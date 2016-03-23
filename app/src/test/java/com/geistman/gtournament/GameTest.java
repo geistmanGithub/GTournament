@@ -1,5 +1,7 @@
 package com.geistman.gtournament;
 
+import android.os.Parcel;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -24,5 +26,16 @@ public class GameTest {
             assertThat("Adding player "+i, game.addPlayer(Integer.toString(i)), is(true));
         }
         assertThat(game.addPlayer(Integer.toString(i)), is(false));
+    }
+
+    @Test
+    public void testGameParcelingAndDeParceling() throws Exception {
+        Parcel parcel = Parcel.obtain();
+        game.writeToParcel(parcel, 0);
+
+        parcel.setDataPosition(0);
+        Game gameFromParcel = Game.CREATOR.createFromParcel(parcel);
+
+        assertEquals(game, gameFromParcel);
     }
 }
