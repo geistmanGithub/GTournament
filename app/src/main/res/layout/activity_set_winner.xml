@@ -34,10 +34,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Medium Text"
+                android:text="987"
                 android:id="@+id/Player1Wins"
                 android:layout_alignParentTop="true"
-                android:layout_alignParentStart="true" />
+                android:layout_alignParentStart="true"
+                android:textSize="@dimen/abc_text_size_display_1_material"
+                android:textColor="#000000" />
 
             <Button
                 android:layout_width="wrap_content"
@@ -51,10 +53,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Medium Text"
+                android:text="654"
                 android:id="@+id/Player2Wins"
                 android:layout_alignBottom="@+id/cancelGame"
-                android:layout_alignParentEnd="true" />
+                android:layout_alignParentEnd="true"
+                android:textSize="@dimen/abc_text_size_display_1_material"
+                android:textColor="#000000" />
         </RelativeLayout>
 
         <Button
