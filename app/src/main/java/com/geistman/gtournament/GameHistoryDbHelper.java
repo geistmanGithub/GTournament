@@ -8,8 +8,9 @@ public class GameHistoryDbHelper extends android.database.sqlite.SQLiteOpenHelpe
 
     private static String TAG = GameHistoryDbHelper.class.getName();
     private static final String DATABASE_NAME ="GameHistoryDB";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
     private static final String DATABASE_CREATE = "create table "+GameHistory.TABLE_NAME+" (" +
+            GameHistory.TABLE_NAME+Game._ID+ " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,"+
             Game.GAME_PLAYER1+" text, " +
             Game.GAME_PLAYER2+" text, " +
             Game.GAME_WINNER+" text);";
@@ -28,10 +29,15 @@ public class GameHistoryDbHelper extends android.database.sqlite.SQLiteOpenHelpe
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        Log.w(TAG,
-                "Upgrading database from version " + oldVersion + " to "
-                        + newVersion + ", which will destroy all old data");
-        db.execSQL("DROP TABLE IF EXISTS Games");
-        onCreate(db);
+        switch (oldVersion) {
+            case 1:
+                Log.w(TAG, "Adding Auto Increment ID to Table gameHistory");
+                String DATABASE_UPGRADE_BackupOldGameHistory = "ALTER TABLE gameHistory RENAME TO v1gameHistory";
+                this.onCreate(db);
+                db.execSQL(DATABASE_UPGRADE_BackupOldGameHistory);
+                //TODO: Migrate old values to new database.
+                //TODO: Drop oldTable
+
+        }
     }
 }
