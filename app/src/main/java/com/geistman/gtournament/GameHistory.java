@@ -49,7 +49,7 @@ public class GameHistory {
         };
 
         String selection = Game.GAME_WINNER+"= '"+winner+"' and ("+Game.GAME_PLAYER1+" = '"+looser+"' or "+Game.GAME_PLAYER2+" = '"+looser+"')";
-        Log.d(TAG, "Querying database: Projection"+ Arrays.toString(projection)+" ,Selection: "+selection);
+        Log.d(TAG, "Querying database: Projection" + Arrays.toString(projection) + " ,Selection: " + selection);
 
         Cursor c = database.query(
                 TABLE_NAME,                               // The table to query
@@ -60,8 +60,20 @@ public class GameHistory {
                 null,                                     // don't filter by row groups
                 null                                      // The sort order
         );
+        int count =  c.getCount();
         c.close();
-        return c.getCount();
+        return count;
+
+    }
+
+    public String getLastGamesStatForPlayers (String winner, String looser, int numberOfLastGames){
+        String query = "Select winner from gameHistory where (player1 = \" "+winner+" \" and player2 = \" "+looser+" \") or (player1 = \" "+looser+" \" and player2 = \" "+winner+" \") order by GameHistory_id desc LIMIT 4";
+        Cursor c = database.rawQuery(query, null);
+
+        //TODO: return count for wach winner or subselect with group
+
+
+        return null;
     }
 
     public void onCreate(SQLiteDatabase db) {
