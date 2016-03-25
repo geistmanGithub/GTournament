@@ -59,11 +59,11 @@ public class Game implements Parcelable, BaseColumns{
     }
 
     public String getPlayer2() {
-        return players.get(2);
+        return players.get(1);
     }
 
     public String getPlayer1() {
-        return players.get(1);
+        return players.get(0);
     }
 
 
