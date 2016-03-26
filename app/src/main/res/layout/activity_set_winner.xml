@@ -22,7 +22,8 @@
             android:layout_height="wrap_content"
             android:text="New Button"
             android:id="@+id/player1"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:textSize="@dimen/abc_alert_dialog_button_bar_height" />
 
         <RelativeLayout
             android:layout_width="fill_parent"
@@ -61,6 +62,7 @@
             android:layout_height="wrap_content"
             android:text="New Button"
             android:id="@+id/player2"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:textSize="@dimen/abc_alert_dialog_button_bar_height" />
     </LinearLayout>
 </RelativeLayout>
