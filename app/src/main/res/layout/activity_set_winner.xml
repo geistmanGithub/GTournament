@@ -34,7 +34,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Medium Text"
+                android:text="123"
                 android:id="@+id/Player1Wins"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentStart="true" />
@@ -51,10 +51,33 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Medium Text"
+                android:text="456"
                 android:id="@+id/Player2Wins"
                 android:layout_alignBottom="@+id/cancelGame"
+                android:layout_alignParentEnd="false"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="12:20"
+                android:id="@+id/LatestWins"
+                android:phoneNumber="false"
+                android:layout_below="@+id/textView"
                 android:layout_alignParentEnd="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Last 10 Games:"
+                android:id="@+id/textView"
+                android:layout_gravity="right"
+                android:layout_weight="1"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true" />
+
         </RelativeLayout>
 
         <Button

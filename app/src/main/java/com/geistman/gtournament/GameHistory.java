@@ -66,8 +66,9 @@ public class GameHistory {
 
     }
 
-    public String getLastGamesStatForPlayers (String player1, String player2, int numberOfLastGames){
-        String query = "Select winner from gameHistory where (player1 = \" "+player1+" \" and player2 = \" "+player2+" \") or (player1 = \" "+player2+" \" and player2 = \" "+player1+" \") order by GameHistory_id desc LIMIT "+numberOfLastGames;
+    public static String getLastGamesStatForPlayers (String player1, String player2, int numberOfLastGames){
+        String query = "Select winner from gameHistory where (player1 = \""+player1+"\" and player2 = \""+player2+"\") or (player1 = \""+player2+"\" and player2 = \""+player1+"\") order by GameHistory_id desc LIMIT "+numberOfLastGames;
+        Log.w(TAG, "Querying "+database.getPath()+": "+query);
         Cursor c = database.rawQuery(query, null);
 
         int winsOfPlayer1=0;
@@ -87,7 +88,7 @@ public class GameHistory {
 
         c.close();
 
-        return winsOfPlayer1 + ":" + winsOfPlayer1;
+        return winsOfPlayer1 + ":" + winsOfPlayer2;
     }
 
     public void onCreate(SQLiteDatabase db) {

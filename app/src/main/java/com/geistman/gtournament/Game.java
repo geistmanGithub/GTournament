@@ -124,4 +124,8 @@ public class Game implements Parcelable, BaseColumns{
     public int getPlayer2Won() {
         return player2Won;
     }
+
+    public String getLatestGameStats(int numberOfGames) {
+        return GameHistory.getLastGamesStatForPlayers(getPlayer1(), getPlayer2(), numberOfGames);
+    }
 }
