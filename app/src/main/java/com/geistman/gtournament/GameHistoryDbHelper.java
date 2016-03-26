@@ -13,7 +13,7 @@ public class GameHistoryDbHelper extends android.database.sqlite.SQLiteOpenHelpe
             GameHistory.TABLE_NAME+Game._ID+ " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,"+
             Game.GAME_PLAYER1+" text, " +
             Game.GAME_PLAYER2+" text, " +
-            Game.GAME_WINNER+" text);";
+            Game.COLUMN_WINNER +" text);";
 
     public GameHistoryDbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);

@@ -20,7 +20,7 @@ public class Game implements Parcelable, BaseColumns{
 
 
     private String winner;
-        public final static String COLUMN_NAME = "winner";
+        public final static String COLUMN_WINNER = "winner";
     private int player1Won;
     private int player2Won;
 
