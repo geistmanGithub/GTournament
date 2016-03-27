@@ -25,8 +25,8 @@ public class GameHistory {
 
     public static void addGame(Game game) {
         ContentValues values = new ContentValues();
-        values.put(Game.GAME_PLAYER1, game.getPlayer1());
-        values.put(Game.GAME_PLAYER2, game.getPlayer2());
+        values.put(Game.COLUMN_Player1, game.getPlayer1());
+        values.put(Game.COLUMN_Player2, game.getPlayer2());
         values.put(Game.COLUMN_WINNER, game.getWinner());
 
         database.insert(TABLE_NAME, null, values);
@@ -48,7 +48,7 @@ public class GameHistory {
                 Game.COLUMN_WINNER
         };
 
-        String selection = Game.COLUMN_WINNER +"= '"+winner+"' and ("+Game.GAME_PLAYER1+" = '"+looser+"' or "+Game.GAME_PLAYER2+" = '"+looser+"')";
+        String selection = Game.COLUMN_WINNER +"= '"+winner+"' and ("+Game.COLUMN_Player1 +" = '"+looser+"' or "+Game.COLUMN_Player2 +" = '"+looser+"')";
         Log.d(TAG, "Querying database: Projection" + Arrays.toString(projection) + " ,Selection: " + selection);
 
         Cursor c = database.query(

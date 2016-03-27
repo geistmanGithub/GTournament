@@ -12,8 +12,8 @@ public class Game implements Parcelable, BaseColumns{
 
     //When adding an attribute also check on the Parcel Generator and Parcel Loader!
     private static final String TAG = "GAME";
-        public final static String GAME_PLAYER1 = "player1";
-        public final static String GAME_PLAYER2 = "player2";
+        public final static String COLUMN_Player1 = "player1";
+        public final static String COLUMN_Player2 = "player2";
 
     private final int MAXPLAYERS = 2;
     private ArrayList<String> players = new ArrayList<>();
