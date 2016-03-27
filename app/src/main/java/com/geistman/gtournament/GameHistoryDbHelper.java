@@ -9,7 +9,12 @@ public class GameHistoryDbHelper extends android.database.sqlite.SQLiteOpenHelpe
 
     private static String TAG = GameHistoryDbHelper.class.getName();
     private static final String DATABASE_NAME ="GameHistoryDB";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
+    private static final String DATABASE_CREATE = "create table "+GameHistory.TABLE_NAME+" (" +
+            GameHistory.TABLE_NAME+Game._ID+ " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,"+
+            Game.COLUMN_Player1 +" text, " +
+            Game.COLUMN_Player2 +" text, " +
+            Game.COLUMN_WINNER +" text);";
 
     public GameHistoryDbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -19,28 +24,8 @@ public class GameHistoryDbHelper extends android.database.sqlite.SQLiteOpenHelpe
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        final String DATABASE_CREATE_v2 = "create table "+GameHistory.TABLE_NAME+" (" +
-                GameHistory.TABLE_NAME+Game._ID+ " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,"+
-                Game.COLUMN_Player1 +" text, " +
-                Game.COLUMN_Player2 +" text, " +
-                Game.COLUMN_WINNER +" text);";
-
-        final String DATABASE_CREATE_v1 = "create table "+GameHistory.TABLE_NAME+" (" +
-                Game.COLUMN_Player1+" text, " +
-                Game.COLUMN_Player2+" text, " +
-                Game.COLUMN_WINNER+" text);";
-
-        String DATABASE_CREATE;
-
-        switch (DATABASE_VERSION) {
-            case 1: DATABASE_CREATE = DATABASE_CREATE_v1;
-                break;
-            case 2: DATABASE_CREATE = DATABASE_CREATE_v2;
-                break;
-            default: DATABASE_CREATE = DATABASE_CREATE_v2;
-        }
-
         db.execSQL(DATABASE_CREATE);
+
     }
 
     @Override
