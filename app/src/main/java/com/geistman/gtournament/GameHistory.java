@@ -25,9 +25,9 @@ public class GameHistory {
 
     public static void addGame(Game game) {
         ContentValues values = new ContentValues();
-        values.put(Game.GAME_PLAYER1, game.getPlayer1());
-        values.put(Game.GAME_PLAYER2, game.getPlayer2());
-        values.put(Game.GAME_WINNER, game.getWinner());
+        values.put(Game.COLUMN_Player1, game.getPlayer1());
+        values.put(Game.COLUMN_Player2, game.getPlayer2());
+        values.put(Game.COLUMN_WINNER, game.getWinner());
 
         database.insert(TABLE_NAME, null, values);
 
@@ -45,11 +45,11 @@ public class GameHistory {
 
     public int getWinsOfPlayer(String winner, String looser) {
         String[] projection = {
-                Game.GAME_WINNER
+                Game.COLUMN_WINNER
         };
 
-        String selection = Game.GAME_WINNER+"= '"+winner+"' and ("+Game.GAME_PLAYER1+" = '"+looser+"' or "+Game.GAME_PLAYER2+" = '"+looser+"')";
-        Log.d(TAG, "Querying database: Projection"+ Arrays.toString(projection)+" ,Selection: "+selection);
+        String selection = Game.COLUMN_WINNER +"= '"+winner+"' and ("+Game.COLUMN_Player1 +" = '"+looser+"' or "+Game.COLUMN_Player2 +" = '"+looser+"')";
+        Log.d(TAG, "Querying database: Projection" + Arrays.toString(projection) + " ,Selection: " + selection);
 
         Cursor c = database.query(
                 TABLE_NAME,                               // The table to query
@@ -60,8 +60,35 @@ public class GameHistory {
                 null,                                     // don't filter by row groups
                 null                                      // The sort order
         );
+        int count =  c.getCount();
         c.close();
-        return c.getCount();
+        return count;
+
+    }
+
+    public static String getLastGamesStatForPlayers (String player1, String player2, int numberOfLastGames){
+        String query = "Select winner from gameHistory where (player1 = \""+player1+"\" and player2 = \""+player2+"\") or (player1 = \""+player2+"\" and player2 = \""+player1+"\") order by GameHistory_id desc LIMIT "+numberOfLastGames;
+        Log.w(TAG, "Querying "+database.getPath()+": "+query);
+        Cursor c = database.rawQuery(query, null);
+
+        int winsOfPlayer1=0;
+        int winsOfPlayer2=0;
+
+
+        while (c.moveToNext()){
+            String winner = c.getString(
+                    c.getColumnIndex(Game.COLUMN_WINNER)
+            );
+
+            if (winner.equals(player1))
+                winsOfPlayer1++;
+            else
+                winsOfPlayer2++;
+        }
+
+        c.close();
+
+        return winsOfPlayer1 + ":" + winsOfPlayer2;
     }
 
     public void onCreate(SQLiteDatabase db) {

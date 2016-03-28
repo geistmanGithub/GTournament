@@ -30,7 +30,7 @@ public class SetWinner extends AppCompatActivity {
 
         final Intent intent = getIntent();
         game = intent.getParcelableExtra(ChoosePlayer.GAME);
-        Log.d(TAG, "Game loaded: "+game.toString());
+        Log.d(TAG, "Game loaded: " + game.toString());
 
         gameHistory = new GameHistory(getApplicationContext());
 
@@ -55,6 +55,9 @@ public class SetWinner extends AppCompatActivity {
 
         final TextView player2Wins= (TextView) findViewById(R.id.Player2Wins);
         player2Wins.setText("Wins: " + game.getPlayer2Won());
+
+        final TextView latestWins = (TextView) findViewById(R.id.LatestWins);
+        latestWins.setText(game.getLatestGameStats(10));
 
 
         if (game.getWinner() != null) {

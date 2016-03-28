@@ -12,15 +12,15 @@ public class Game implements Parcelable, BaseColumns{
 
     //When adding an attribute also check on the Parcel Generator and Parcel Loader!
     private static final String TAG = "GAME";
-        public final static String GAME_PLAYER1 = "player1";
-        public final static String GAME_PLAYER2 = "player2";
+        public final static String COLUMN_Player1 = "player1";
+        public final static String COLUMN_Player2 = "player2";
 
     private final int MAXPLAYERS = 2;
     private ArrayList<String> players = new ArrayList<>();
 
 
     private String winner;
-        public final static String GAME_WINNER = "winner";
+        public final static String COLUMN_WINNER = "winner";
     private int player1Won;
     private int player2Won;
 
@@ -59,11 +59,11 @@ public class Game implements Parcelable, BaseColumns{
     }
 
     public String getPlayer2() {
-        return players.get(2);
+        return players.get(1);
     }
 
     public String getPlayer1() {
-        return players.get(1);
+        return players.get(0);
     }
 
 
@@ -123,5 +123,9 @@ public class Game implements Parcelable, BaseColumns{
 
     public int getPlayer2Won() {
         return player2Won;
+    }
+
+    public String getLatestGameStats(int numberOfGames) {
+        return GameHistory.getLastGamesStatForPlayers(getPlayer1(), getPlayer2(), numberOfGames);
     }
 }
