@@ -14,16 +14,30 @@ public class GameHistory {
 
     private static SQLiteDatabase database;
     public static final String TABLE_NAME = "gameHistory";
+    private static GameHistory instance;
     private final GameHistoryDbHelper gameHistoryDbHelper;
 
+    private Context context;
 
-    public GameHistory(Context context) {
+    public Context getContext() {
+        return context;
+    }
+
+    private GameHistory(Context context) {
         gameHistoryDbHelper = new GameHistoryDbHelper(context);
         database = gameHistoryDbHelper.getWritableDatabase();
         Log.d(TAG, "Games stored in Database: " + getDatabaseCount());
+        this.context = context;
     }
 
-    public static void addGame(Game game) {
+    public static GameHistory getInstance(Context context)  {
+        if (instance == null) {
+            instance = new GameHistory(context);
+        }
+        return instance;
+    }
+
+    public void addGame(Game game) {
         ContentValues values = new ContentValues();
         values.put(Game.COLUMN_Player1, game.getPlayer1());
         values.put(Game.COLUMN_Player2, game.getPlayer2());
@@ -34,7 +48,7 @@ public class GameHistory {
         Log.d(TAG, "Number of Games stored in database: " + getDatabaseCount());
     }
 
-    private static int getDatabaseCount() {
+    private int getDatabaseCount() {
         Cursor mCount= database.rawQuery("select count(*) from " + TABLE_NAME, null);
         mCount.moveToFirst();
         int count= mCount.getInt(0);
@@ -66,7 +80,7 @@ public class GameHistory {
 
     }
 
-    public static String getLastGamesStatForPlayers (String player1, String player2, int numberOfLastGames){
+    public String getLastGamesStatForPlayers (String player1, String player2, int numberOfLastGames){
         String query = "Select winner from gameHistory where (player1 = \""+player1+"\" and player2 = \""+player2+"\") or (player1 = \""+player2+"\" and player2 = \""+player1+"\") order by GameHistory_id desc LIMIT "+numberOfLastGames;
         Log.w(TAG, "Querying "+database.getPath()+": "+query);
         Cursor c = database.rawQuery(query, null);

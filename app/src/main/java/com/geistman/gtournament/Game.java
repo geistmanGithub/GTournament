@@ -109,7 +109,7 @@ public class Game implements Parcelable, BaseColumns{
 
 
     public void confirmWinner() {
-        GameHistory.addGame(this);
+        GameHistory.getInstance(null).addGame(this);
     }
 
     public void setWins(int player1Won, int player2Won) {
@@ -126,6 +126,6 @@ public class Game implements Parcelable, BaseColumns{
     }
 
     public String getLatestGameStats(int numberOfGames) {
-        return GameHistory.getLastGamesStatForPlayers(getPlayer1(), getPlayer2(), numberOfGames);
+        return GameHistory.getInstance(null).getLastGamesStatForPlayers(getPlayer1(), getPlayer2(), numberOfGames);
     }
 }

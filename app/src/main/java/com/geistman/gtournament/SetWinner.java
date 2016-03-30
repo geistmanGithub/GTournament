@@ -32,7 +32,7 @@ public class SetWinner extends AppCompatActivity {
         game = intent.getParcelableExtra(ChoosePlayer.GAME);
         Log.d(TAG, "Game loaded: " + game.toString());
 
-        gameHistory = new GameHistory(getApplicationContext());
+        gameHistory = GameHistory.getInstance(getApplicationContext());
 
         final Button player1Button = (Button) findViewById(R.id.player1);
         player1Button.setText(game.getPlayer1());
