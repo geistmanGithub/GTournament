@@ -60,8 +60,14 @@ public class SetWinner extends AppCompatActivity {
         if (game.getWinner() != null) {
             ViewGroup parentView = (ViewGroup) findViewById(R.id.playerViewGroup);
             String winnerButtonTag = intent.getCharSequenceExtra(WINNER_BUTTON_TAG).toString();
-            setEnabledOfAllElementsOfViewExcept(parentView, winnerButtonTag, false);
+
             Button winnersButton = getWinnersButton(winnerButtonTag);
+
+            if (winnersButton.getText().equals(game.getPlayer1()))
+                player1Wins.setText("Wins: " + (game.getPlayer2Won()+1));
+            else
+                player2Wins.setText("Wins: " + (game.getPlayer2Won()+1));
+
             winnersButton.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -72,6 +78,8 @@ public class SetWinner extends AppCompatActivity {
                     startActivity(newGame);
                 }
             });
+
+            setEnabledOfAllElementsOfViewExcept(parentView, winnerButtonTag, false);
         }
 
         else {
