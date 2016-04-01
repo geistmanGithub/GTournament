@@ -63,10 +63,15 @@ public class SetWinner extends AppCompatActivity {
 
             Button winnersButton = getWinnersButton(winnerButtonTag);
 
-            if (winnersButton.getText().equals(game.getPlayer1()))
+            if (winnersButton.getText().equals(game.getPlayer1())){
                 player1Wins.setText("Wins: " + (game.getPlayer1Won()+1));
-            else
+                player1Wins.setTag(winnerButtonTag);
+            }
+            else {
                 player2Wins.setText("Wins: " + (game.getPlayer2Won()+1));
+                player2Wins.setTag(winnerButtonTag);
+            }
+
 
             winnersButton.setOnClickListener(new OnClickListener() {
                 @Override
