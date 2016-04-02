@@ -34,21 +34,16 @@ public class GameHistoryDbHelper extends android.database.sqlite.SQLiteOpenHelpe
             case 1:
                 Log.w(TAG, "Adding Auto Increment ID to Table gameHistory. Games will be preserved");
                 String DATABASE_UPGRADE_BackupOldGameHistory = "ALTER TABLE gameHistory RENAME TO v1gameHistory";
-                this.onCreate(db);
                 db.execSQL(DATABASE_UPGRADE_BackupOldGameHistory);
-                Cursor c = db.rawQuery("Select * from v1gameHistory", null);
 
-                while (c.moveToNext()) {
-                    Game game = new Game();
-                    game.addPlayer(c.getString(c.getColumnIndex(Game.COLUMN_Player1)));
-                    game.addPlayer(c.getString(c.getColumnIndex(Game.COLUMN_Player2)));
-                    game.setWinner(c.getString(c.getColumnIndex(Game.COLUMN_WINNER)));
-                    game.confirmWinner();
-                }
+                onCreate(db);
 
-
-                //TODO: Drop oldTable
-
+                String DATABASE_RESTORE_BackupValuesFromOldGameHistory =
+                        "Insert into gameHistory(player1, player2, winner) " +
+                                "Select player1, player2, winner " +
+                                "from v1gameHistory;";
+                db.execSQL(DATABASE_RESTORE_BackupValuesFromOldGameHistory);
+                db.execSQL("DROP TABLE v1gameHistory;");
         }
     }
 }
