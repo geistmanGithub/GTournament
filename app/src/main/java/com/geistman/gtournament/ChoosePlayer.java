@@ -73,8 +73,6 @@ public class ChoosePlayer extends AppCompatActivity {
     }
 
     private void startGame() {
-        game.setWins(gameHistory.getWinsOfPlayer(game.getPlayer1(), game.getPlayer2()), gameHistory.getWinsOfPlayer(game.getPlayer2(), game.getPlayer1()));
-
         Intent setWinner = new Intent(this, SetWinner.class);
 
         setWinner.putExtra(GAME, game);

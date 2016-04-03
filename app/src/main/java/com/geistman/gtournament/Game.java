@@ -12,15 +12,21 @@ public class Game implements Parcelable, BaseColumns{
 
     //When adding an attribute also check on the Parcel Generator and Parcel Loader!
     private static final String TAG = "GAME";
-        public final static String COLUMN_Player1 = "player1";
-        public final static String COLUMN_Player2 = "player2";
 
-    private final int MAXPLAYERS = 2;
+    //Settings
+    private final static int MAXPLAYERS = 2;
+    private final static int RECENT_GAMES_TO_CONSIDER = 10;
+
+    //DatabaseContract
+    public final static String COLUMN_Player1 = "player1";
+    public final static String COLUMN_Player2 = "player2";
+    public final static String COLUMN_WINNER = "winner";
+
+    //Attributes
+    private String winner;
     private ArrayList<String> players = new ArrayList<>();
 
-
-    private String winner;
-        public final static String COLUMN_WINNER = "winner";
+    //Helping Attributes
     private int player1Won;
     private int player2Won;
 
@@ -70,6 +76,12 @@ public class Game implements Parcelable, BaseColumns{
     public boolean addPlayer(String player) {
         if (players.size() < MAXPLAYERS) {
             players.add(player);
+
+            if(isGameReady()) {
+                final int winsOfPlayer1 = GameHistory.getInstance(null).getWinsOfPlayer(getPlayer1(), getPlayer2());
+                final int winsOfPlayer2 = GameHistory.getInstance(null).getWinsOfPlayer(getPlayer2(), getPlayer1());
+                setWins(winsOfPlayer1, winsOfPlayer2);
+            }
             return true;
         }
         return false;
@@ -125,7 +137,7 @@ public class Game implements Parcelable, BaseColumns{
         return player2Won;
     }
 
-    public String getLatestGameStats(int numberOfGames) {
-        return GameHistory.getInstance(null).getLastGamesStatForPlayers(getPlayer1(), getPlayer2(), numberOfGames);
+    public String getLatestGameStats() {
+        return GameHistory.getInstance(null).getLastGamesStatForPlayers(getPlayer1(), getPlayer2(), RECENT_GAMES_TO_CONSIDER);
     }
 }

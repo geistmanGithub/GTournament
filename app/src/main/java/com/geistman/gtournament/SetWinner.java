@@ -57,7 +57,7 @@ public class SetWinner extends AppCompatActivity {
         player2Wins.setText("Wins: " + game.getPlayer2Won());
 
         final TextView latestWins = (TextView) findViewById(R.id.LatestWins);
-        latestWins.setText(game.getLatestGameStats(10));
+        latestWins.setText(game.getLatestGameStats());
 
 
         if (game.getWinner() != null) {
