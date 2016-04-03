@@ -6,7 +6,6 @@ import android.provider.BaseColumns;
 import android.util.Log;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Game implements Parcelable, BaseColumns{
 
@@ -107,12 +106,14 @@ public class Game implements Parcelable, BaseColumns{
 
     @Override
     public String toString() {
-        String s = "";
+        String s = "Players: [";
         for (String player: players) {
-            s += "Player: "+player;
+            s += player + ",";
         }
+        s = s.substring(0,s.length()-1);
+        s += "]";
         
-        return "Game{" +
+        return "Game{" + s +
                 ", player1Won=" + player1Won +
                 ", player2Won=" + player2Won +
                 ", winner='" + winner + '\'' +
