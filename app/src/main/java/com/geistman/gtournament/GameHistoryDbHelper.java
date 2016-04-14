@@ -28,7 +28,9 @@ public class GameHistoryDbHelper extends android.database.sqlite.SQLiteOpenHelpe
             "create table ELO_History (" +
                     GameHistory.TABLE_NAME+Game._ID+" INTEGER NOT NULL," +
                     Player.TABLE_NAME+Player._ID+" INTEGER NOT NULL," +
-                    "PRIMARY KEY "+ GameHistory.TABLE_NAME+Game._ID + "," + Player.TABLE_NAME+Player._ID +
+                    Player.COLUMN_TT_ELO +" INTEGER NOT NULL," +
+                    "FOREIGN KEY("+GameHistory.TABLE_NAME+Game._ID+") REFERENCES "+GameHistory.TABLE_NAME+"("+GameHistory.TABLE_NAME+Game._ID+")," +
+                    "FOREIGN KEY("+Player.TABLE_NAME+Player._ID+") REFERENCES "+Player.TABLE_NAME+"("+Player.TABLE_NAME+Player._ID+")"+
                     ");"
             ;
 
