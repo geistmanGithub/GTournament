@@ -68,8 +68,9 @@ public class GameHistoryDbHelper extends android.database.sqlite.SQLiteOpenHelpe
             case 2:
                 onCreate(db);
                 Log.w(TAG, "Adding new player's table and adding existing players from game's history to it");
-                String DATABASE_EXTRACT_EXISTING_PLAYERS =
+                String DATABASE_EXTRACT_EXISTING_PLAYERS_AND_CREATE_THEM =
                         "insert into players (name) select distinct player from (select player1 as player from gameHistory union select player2 as player from gameHistory);";
+                db.execSQL(DATABASE_EXTRACT_EXISTING_PLAYERS_AND_CREATE_THEM);
                 //TODO: Populate ELO_History. Default Value is 400 if no value exists. Formula: https://de.wikipedia.org/wiki/Elo-Zahl#Tischtennis
         }
     }
