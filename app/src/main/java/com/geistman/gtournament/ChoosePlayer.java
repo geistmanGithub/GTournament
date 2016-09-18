@@ -42,6 +42,8 @@ public class ChoosePlayer extends AppCompatActivity {
         playersList.add("Herbert");
         playersList.add("Thomas");
         playersList.add("Philipp");
+        playersList.add("Gerhard");
+        playersList.add("Andreas");
 
         final ListView playersListView = (ListView) this.findViewById(R.id.playerList);
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(
